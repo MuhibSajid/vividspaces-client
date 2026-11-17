@@ -1,26 +1,25 @@
-"use client";
-
-import { useState } from "react";
+import { authClient } from "@/lib/auth-client";
 
 export type AuthUser = {
   name: string;
   email: string;
-  image: string;
-};
-
-const MOCK_USER: AuthUser = {
-  name: "Maya Okafor",
-  email: "maya@halostudio.co",
-  image: "/img/host.png",
+  image?: string;
 };
 
 export function useAuth() {
-  const [user, setUser] = useState<AuthUser | null>(MOCK_USER);
+  const { data: session, isPending } = authClient.useSession();
 
-  return {
-    user,
-    isPending: false,
-    login: () => setUser(MOCK_USER),
-    logout: () => setUser(null),
-  };
+  const user: AuthUser | null = session?.user
+    ? {
+        name: session.user.name,
+        email: session.user.email,
+        image: session.user.image ?? undefined,
+      }
+    : null;
+
+  async function logout() {
+    await authClient.signOut();
+  }
+
+  return { user, isPending, logout };
 }

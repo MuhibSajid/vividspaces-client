@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";
+
 import {
   Aperture,
   CalendarCheck,
@@ -63,11 +64,11 @@ function getInitials(name: string) {
 
 export function Navbar() {
   const pathname = usePathname();
-  const { user, logout } = useAuth();
+  const { user, isPending, logout } = useAuth();
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  function handleLogout() {
-    logout();
+  async function handleLogout() {
+    await logout();
     setMobileOpen(false);
     toast.success("You have been logged out.");
   }
@@ -114,7 +115,9 @@ export function Navbar() {
         <div className="flex items-center gap-2">
           <ThemeToggle />
 
-          {user ? (
+                    {isPending ? (
+            <div className="h-9 w-16 animate-pulse rounded-full bg-zinc-200 dark:bg-zinc-800" />
+          ) : user ? (
             <DropdownMenu>
               <DropdownMenuTrigger
                 render={
@@ -174,20 +177,19 @@ export function Navbar() {
           ) : (
             <>
               <Link
-                href="/login"
+                href="/signin"
                 className="hidden rounded-full px-4 py-2 text-sm font-medium text-zinc-700 hover:bg-zinc-100 sm:inline-flex dark:text-zinc-300 dark:hover:bg-zinc-900"
               >
                 Login
               </Link>
               <Link
-                href="/register"
+                href="/signup"
                 className="hidden rounded-full bg-zinc-900 px-4 py-2 text-sm font-medium text-white hover:bg-zinc-700 sm:inline-flex dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200"
               >
                 Register
               </Link>
             </>
           )}
-
           {/* Mobile menu button */}
           <button
             type="button"
@@ -237,16 +239,14 @@ export function Navbar() {
           {!user && (
             <div className="grid grid-cols-2 gap-2 border-t border-zinc-200 p-3 dark:border-zinc-800">
               <Link
-                href="/login"
-                onClick={() => setMobileOpen(false)}
-                className="rounded-full border border-zinc-300 py-2.5 text-center text-sm font-semibold dark:border-zinc-700"
+                href="/signin"
+                className="hidden rounded-full px-4 py-2 text-sm font-medium text-zinc-700 hover:bg-zinc-100 sm:inline-flex dark:text-zinc-300 dark:hover:bg-zinc-900"
               >
                 Login
               </Link>
               <Link
-                href="/register"
-                onClick={() => setMobileOpen(false)}
-                className="rounded-full bg-coral-500 py-2.5 text-center text-sm font-semibold text-white hover:bg-coral-600"
+                href="/signup"
+                className="hidden rounded-full bg-zinc-900 px-4 py-2 text-sm font-medium text-white hover:bg-zinc-700 sm:inline-flex dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200"
               >
                 Register
               </Link>
