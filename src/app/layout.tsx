@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
-
+import { Suspense } from "react";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -60,10 +60,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="flex min-h-full flex-col bg-white text-zinc-900 transition-colors dark:bg-zinc-950 dark:text-zinc-100">
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <Suspense fallback={<div className="h-16 border-b border-zinc-200 dark:border-zinc-800" />}>
               <Navbar />
-              <main className="flex-1">{children}</main>
-              <Footer />
-              <ToastContainer position="top-right" autoClose={3000} />
+            </Suspense>
+            <main className="flex-1">{children}</main>
+            <Footer />
+            <ToastContainer position="top-right" autoClose={3000} />
           </ThemeProvider>
       </body>
     </html>
