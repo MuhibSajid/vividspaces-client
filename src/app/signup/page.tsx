@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-
+import { PasswordInput } from "@/components/auth/password-input";
 import { authClient } from "@/lib/auth-client";
 
 type Values = { name: string; email: string; image: string; password: string };
@@ -115,7 +115,11 @@ export default function SignupPage() {
 
         <label className="mt-4 block">
           <span className="text-sm font-medium">Password</span>
-          <input name="password" type="password" autoComplete="new-password" placeholder="Min 6 characters" className={inputClass} />
+          <PasswordInput
+            name="password"
+            autoComplete="new-password"
+            placeholder="Min 6 characters"
+          />
           <FieldError message={errors.password} />
         </label>
 

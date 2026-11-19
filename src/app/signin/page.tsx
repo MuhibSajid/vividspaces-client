@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-
+import { PasswordInput } from "@/components/auth/password-input";
 import { authClient } from "@/lib/auth-client";
 
 type Errors = { email?: string; password?: string };
@@ -83,7 +83,7 @@ export default function SigninPage() {
           <FieldError message={errors.email} />
         </label>
 
-        <label className="mt-4 block">
+       <label className="mt-4 block">
           <span className="flex justify-between text-sm font-medium">
             Password
             <button
@@ -94,12 +94,10 @@ export default function SigninPage() {
               Forgot password?
             </button>
           </span>
-          <input
+          <PasswordInput
             name="password"
-            type="password"
             autoComplete="current-password"
             placeholder="Your password"
-            className={inputClass}
           />
           <FieldError message={errors.password} />
         </label>
