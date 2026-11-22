@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Camera, Clapperboard, Mic, Music4, Palette } from "lucide-react";
 
@@ -8,6 +9,7 @@ const ITEMS = [
     category: "Photo Studio",
     title: "Photo Studios",
     note: "Cycs, daylight lofts",
+    image: "/img/daylight.png",
     gradient: "from-zinc-800 via-zinc-900 to-coral-700",
     icon: Camera,
   },
@@ -15,6 +17,7 @@ const ITEMS = [
     category: "Sound Stage",
     title: "Sound Stages",
     note: "Full production lots",
+    image: "/img/soundstage.png",
     gradient: "from-zinc-800 via-zinc-900 to-sky-900",
     icon: Clapperboard,
   },
@@ -22,6 +25,7 @@ const ITEMS = [
     category: "Podcast Room",
     title: "Podcast Rooms",
     note: "Treated, camera-ready",
+    image: "/img/podcast.png",
     gradient: "from-zinc-800 via-zinc-900 to-amber-800",
     icon: Mic,
   },
@@ -29,6 +33,7 @@ const ITEMS = [
     category: "Music Suite",
     title: "Music Suites",
     note: "Record, mix, rehearse",
+    image: "/img/hero-2.png",
     gradient: "from-zinc-800 via-zinc-900 to-purple-900",
     icon: Music4,
   },
@@ -36,6 +41,7 @@ const ITEMS = [
     category: "Art Workshop",
     title: "Art Workshops",
     note: "Sunlit creative lofts",
+    image: "/img/hero-3.png",
     gradient: "from-zinc-800 via-zinc-900 to-emerald-900",
     icon: Palette,
   },
@@ -57,7 +63,7 @@ export function Categories({ counts }: { counts: Counts }) {
         </div>
 
         <div className="mt-12 grid grid-cols-2 gap-4 md:grid-cols-5">
-          {ITEMS.map(({ category, title, note, gradient, icon: Icon }, i) => {
+          {ITEMS.map(({ category, title, note, image, gradient, icon: Icon }, i) => {
             const count = counts?.[category] ?? 0;
             return (
               <Link
@@ -67,13 +73,14 @@ export function Categories({ counts }: { counts: Counts }) {
                   i === 0 ? "col-span-2 md:col-span-1" : ""
                 }`}
               >
-                <div
-                  className={`absolute inset-0 bg-linear-to-br ${gradient} transition duration-700 group-hover:scale-105`}
-                />
-                <Icon
-                  aria-hidden="true"
-                  strokeWidth={1}
-                  className="absolute -right-2 -top-2 h-24 w-24 text-white/10"
+                {/* Gradient shows behind the photo and if it fails to load */}
+                <div className={`absolute inset-0 bg-linear-to-br ${gradient}`} />
+                <Image
+                  src={image}
+                  alt=""
+                  fill
+                  sizes="(min-width: 768px) 20vw, 50vw"
+                  className="object-cover transition duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-zinc-950/90 via-zinc-950/20 to-transparent" />
                 <div className="absolute inset-x-0 bottom-0 p-5 text-white">
