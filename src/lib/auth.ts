@@ -3,6 +3,7 @@ import { MongoClient } from "mongodb";
 import { mongodbAdapter } from "@better-auth/mongo-adapter";
 
 const client = new MongoClient(process.env.MONGODB_CLIENT_URL as string);
+await client.connect();
 const db = client.db("vividspaces");
 
 export const auth = betterAuth({
