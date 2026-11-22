@@ -7,6 +7,7 @@ import { CalendarCheck, Clock, MapPin, TriangleAlert } from "lucide-react";
 import { toast } from "react-toastify";
 
 import { useAuth } from "@/hooks/use-auth";
+import { ListSkeleton, PageLoader } from "@/components/shared/loading";
 import type { Booking, BookingStatus } from "@/types/booking";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000";
@@ -91,7 +92,7 @@ export default function MyBookingsPage() {
     }
   }
 
-  if (isPending) return null;
+  if (isPending) return <PageLoader label="Checking your account" />;
 
   if (!user) {
     return (
@@ -141,11 +142,7 @@ export default function MyBookingsPage() {
           We couldn&apos;t load your bookings. Please try again.
         </p>
       ) : bookings === null ? (
-        <div className="mt-10 space-y-4">
-          {Array.from({ length: 3 }).map((_, i) => (
-            <div key={i} className="h-32 animate-pulse rounded-3xl bg-zinc-200 dark:bg-zinc-900" />
-          ))}
-        </div>
+        <ListSkeleton rows={3} className="mt-10" />
       ) : visible.length === 0 ? (
         <div className="mt-10 rounded-3xl border border-dashed border-zinc-300 p-10 text-center dark:border-zinc-700">
           <p className="font-medium">

@@ -17,6 +17,7 @@ import {
 
 import { useAuth } from "@/hooks/use-auth";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
+import { SkeletonBlock } from "@/components/shared/loading";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
@@ -120,7 +121,7 @@ export function Navbar() {
           <ThemeToggle />
 
                     {isPending ? (
-            <div className="h-9 w-16 animate-pulse rounded-full bg-zinc-200 dark:bg-zinc-800" />
+            <SkeletonBlock className="h-9 w-16 rounded-full" />
           ) : user ? (
             <DropdownMenu>
               <DropdownMenuTrigger

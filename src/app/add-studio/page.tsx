@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 
 import { useAuth } from "@/hooks/use-auth";
 import { AMENITIES, CATEGORIES } from "@/lib/constants";
+import { FormSkeleton } from "@/components/shared/loading";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000";
 
@@ -97,11 +98,7 @@ export default function AddStudioPage() {
   }
 
   if (isPending) {
-    return (
-      <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
-        <div className="h-96 animate-pulse rounded-3xl bg-zinc-200 dark:bg-zinc-900" />
-      </div>
-    );
+    return <FormSkeleton />;
   }
 
   if (!user) {

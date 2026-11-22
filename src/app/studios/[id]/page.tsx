@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Check, MapPin, Star, UserRound } from "lucide-react";
 
+import { StudioDetailsSkeleton } from "@/components/shared/loading";
 import { BookingPanel } from "@/components/studios/booking-panel";
 import type { Studio } from "@/types/studio";
 
@@ -155,22 +156,13 @@ async function StudioDetails({ params }: { params: Promise<{ id: string }> }) {
   );
 }
 
-function DetailsSkeleton() {
-  return (
-    <div className="mx-auto max-w-7xl animate-pulse px-4 py-10 sm:px-6">
-      <div className="h-10 w-1/2 rounded bg-zinc-200 dark:bg-zinc-800" />
-      <div className="mt-6 aspect-video rounded-3xl bg-zinc-200 dark:bg-zinc-800" />
-    </div>
-  );
-}
-
 export default function StudioDetailsPage({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
   return (
-    <Suspense fallback={<DetailsSkeleton />}>
+    <Suspense fallback={<StudioDetailsSkeleton />}>
       <StudioDetails params={params} />
     </Suspense>
   );

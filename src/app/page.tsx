@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 
+import { SkeletonBlock } from "@/components/shared/loading";
 import { HeroSlider } from "@/components/home/hero-slider";
 import { SearchBar } from "@/components/home/search-bar";
 import { FeaturedStudios } from "@/components/home/featured-studios";
@@ -9,10 +10,7 @@ import { HostGuarantee } from "@/components/home/host-guarantee";
 
 function HeroSkeleton() {
   return (
-    <div
-      className="mx-auto min-h-160 max-w-7xl animate-pulse rounded-[28px] bg-zinc-200 sm:min-h-170 lg:min-h-180 dark:bg-zinc-900"
-      aria-hidden="true"
-    />
+    <SkeletonBlock className="mx-auto min-h-160 max-w-7xl rounded-[28px] sm:min-h-170 lg:min-h-180" />
   );
 }
 

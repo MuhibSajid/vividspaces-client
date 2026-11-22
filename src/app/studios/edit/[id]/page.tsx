@@ -1,9 +1,7 @@
 import { Suspense } from "react";
 
-import {
-  EditStudioForm,
-  EditStudioSkeleton,
-} from "@/components/studios/edit-studio-form";
+import { FormSkeleton } from "@/components/shared/loading";
+import { EditStudioForm } from "@/components/studios/edit-studio-form";
 
 async function EditStudio({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -16,7 +14,7 @@ export default function EditStudioPage({
   params: Promise<{ id: string }>;
 }) {
   return (
-    <Suspense fallback={<EditStudioSkeleton />}>
+    <Suspense fallback={<FormSkeleton />}>
       <EditStudio params={params} />
     </Suspense>
   );

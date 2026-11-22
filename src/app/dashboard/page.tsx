@@ -7,6 +7,7 @@ import { Plus, TriangleAlert } from "lucide-react";
 import { toast } from "react-toastify";
 
 import { useAuth } from "@/hooks/use-auth";
+import { PageLoader, SkeletonBlock } from "@/components/shared/loading";
 import type { Booking, BookingStatus } from "@/types/booking";
 import type { Studio } from "@/types/studio";
 
@@ -103,7 +104,7 @@ export default function DashboardPage() {
     }
   }
 
-  if (isPending) return null;
+  if (isPending) return <PageLoader label="Checking your account" />;
 
   if (!user) {
     return (
@@ -169,7 +170,7 @@ export default function DashboardPage() {
           We couldn&apos;t load your booking requests. Please try again.
         </p>
       ) : bookings === null ? (
-        <div className="mt-6 h-48 animate-pulse rounded-2xl bg-zinc-200 dark:bg-zinc-900" />
+        <SkeletonBlock className="mt-6 h-48 rounded-2xl" />
       ) : bookings.length === 0 ? (
         <div className="mt-6 rounded-3xl border border-dashed border-zinc-300 p-10 text-center dark:border-zinc-700">
           <p className="font-medium">No booking requests yet</p>

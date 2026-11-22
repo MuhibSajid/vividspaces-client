@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import Link from "next/link";
 
+import { SkeletonBlock, StudioGridSkeleton } from "@/components/shared/loading";
 import { ExploreFilters } from "@/components/studios/explore-filters";
 import { StudioCard } from "@/components/studios/studio-card";
 import type { Studio } from "@/types/studio";
@@ -79,20 +80,6 @@ async function Results({ searchParams }: { searchParams: SearchParams }) {
   );
 }
 
-function GridSkeleton() {
-  return (
-    <div className="mt-14 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
-      {Array.from({ length: 6 }).map((_, i) => (
-        <div key={i} className="animate-pulse">
-          <div className="aspect-4/3 rounded-3xl bg-zinc-200 dark:bg-zinc-800" />
-          <div className="mt-4 h-5 w-2/3 rounded bg-zinc-200 dark:bg-zinc-800" />
-          <div className="mt-2 h-4 w-1/3 rounded bg-zinc-200 dark:bg-zinc-800" />
-        </div>
-      ))}
-    </div>
-  );
-}
-
 export default function ExplorePage({
   searchParams,
 }: {
@@ -108,14 +95,12 @@ export default function ExplorePage({
       </h1>
 
       <Suspense
-        fallback={
-          <div className="mt-8 h-16 animate-pulse rounded-2xl bg-zinc-200 dark:bg-zinc-900" />
-        }
+        fallback={<SkeletonBlock className="mt-8 h-16 rounded-2xl" />}
       >
         <ExploreFilters />
       </Suspense>
 
-      <Suspense fallback={<GridSkeleton />}>
+      <Suspense fallback={<StudioGridSkeleton className="mt-14" />}>
         <Results searchParams={searchParams} />
       </Suspense>
     </section>

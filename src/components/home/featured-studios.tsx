@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Suspense } from "react";
 
+import { StudioGridSkeleton } from "@/components/shared/loading";
 import { StudioCard } from "@/components/studios/studio-card";
 import type { Studio } from "@/types/studio";
 
@@ -48,20 +49,6 @@ async function StudioGrid() {
   );
 }
 
-function GridSkeleton() {
-  return (
-    <div className="mt-12 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
-      {Array.from({ length: 6 }).map((_, i) => (
-        <div key={i} className="animate-pulse">
-          <div className="aspect-4/3 rounded-3xl bg-zinc-200 dark:bg-zinc-800" />
-          <div className="mt-4 h-5 w-2/3 rounded bg-zinc-200 dark:bg-zinc-800" />
-          <div className="mt-2 h-4 w-1/3 rounded bg-zinc-200 dark:bg-zinc-800" />
-        </div>
-      ))}
-    </div>
-  );
-}
-
 export function FeaturedStudios() {
   return (
     <section id="featured" className="mx-auto max-w-7xl px-4 py-24 sm:px-6">
@@ -82,7 +69,7 @@ export function FeaturedStudios() {
         </Link>
       </div>
 
-      <Suspense fallback={<GridSkeleton />}>
+      <Suspense fallback={<StudioGridSkeleton className="mt-12" />}>
         <StudioGrid />
       </Suspense>
     </section>

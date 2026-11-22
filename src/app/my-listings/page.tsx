@@ -6,6 +6,7 @@ import { Pencil, Trash2, TriangleAlert } from "lucide-react";
 import { toast } from "react-toastify";
 
 import { useAuth } from "@/hooks/use-auth";
+import { PageLoader, StudioGridSkeleton } from "@/components/shared/loading";
 import { StudioCard } from "@/components/studios/studio-card";
 import type { Studio } from "@/types/studio";
 
@@ -63,7 +64,7 @@ export default function MyListingsPage() {
     }
   }
 
-  if (isPending) return null;
+  if (isPending) return <PageLoader label="Checking your account" />;
 
   if (!user) {
     return (
@@ -96,14 +97,7 @@ export default function MyListingsPage() {
           We couldn&apos;t load your listings. Please try again.
         </p>
       ) : studios === null ? (
-        <div className="mt-12 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
-          {Array.from({ length: 3 }).map((_, i) => (
-            <div key={i} className="animate-pulse">
-              <div className="aspect-4/3 rounded-3xl bg-zinc-200 dark:bg-zinc-800" />
-              <div className="mt-4 h-5 w-2/3 rounded bg-zinc-200 dark:bg-zinc-800" />
-            </div>
-          ))}
-        </div>
+        <StudioGridSkeleton count={3} className="mt-12" />
       ) : studios.length === 0 ? (
         <div className="mt-12 rounded-3xl border border-dashed border-zinc-300 p-10 text-center dark:border-zinc-700">
           <p className="font-medium">You haven&apos;t listed a studio yet</p>
