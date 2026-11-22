@@ -6,11 +6,10 @@ import { Pencil, Trash2, TriangleAlert } from "lucide-react";
 import { toast } from "react-toastify";
 
 import { useAuth } from "@/hooks/use-auth";
+import { API_URL } from "@/lib/api";
 import { PageLoader, StudioGridSkeleton } from "@/components/shared/loading";
 import { StudioCard } from "@/components/studios/studio-card";
 import type { Studio } from "@/types/studio";
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000";
 
 export default function MyListingsPage() {
   const { user, isPending } = useAuth();

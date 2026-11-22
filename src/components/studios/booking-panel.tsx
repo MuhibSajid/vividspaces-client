@@ -6,8 +6,7 @@ import { toast } from "react-toastify";
 import { X } from "lucide-react";
 
 import { useAuth } from "@/hooks/use-auth";
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000";
+import { API_URL } from "@/lib/api";
 
 type Props = {
   studio: {

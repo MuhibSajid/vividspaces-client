@@ -6,10 +6,9 @@ import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
 import { useAuth } from "@/hooks/use-auth";
+import { API_URL } from "@/lib/api";
 import { AMENITIES, CATEGORIES } from "@/lib/constants";
 import { FormSkeleton } from "@/components/shared/loading";
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000";
 
 type Errors = Record<string, string>;
 

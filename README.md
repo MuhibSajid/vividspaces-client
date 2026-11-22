@@ -20,6 +20,19 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Environment
+
+Create `.env` (see `.env.example`) before running or deploying:
+
+| Variable | Scope | Purpose |
+| --- | --- | --- |
+| `NEXT_PUBLIC_API_URL` | browser + server | Base URL of the VividSpaces API (production default: `https://vividspaces-server.vercel.app`). Inlined at build time — redeploy after changing it. |
+| `BETTER_AUTH_SECRET` | server | better-auth signing secret. |
+| `BETTER_AUTH_URL` | server | Public URL of this app, e.g. `https://vividspaces-client.vercel.app`. |
+| `MONGODB_CLIENT_URL` | server | MongoDB Atlas connection string. |
+
+On Vercel, set all four under **Project → Settings → Environment Variables**, then redeploy. Use `https://vividspaces-server.vercel.app` for `NEXT_PUBLIC_API_URL`; verify it responds at `https://vividspaces-server.vercel.app/api/studios?limit=1`. Without a reachable API (or with the localhost fallback), every studio/booking fetch fails in production. The backend also needs its own `MONGODB_SERVER_URL` set in the **server** Vercel project.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

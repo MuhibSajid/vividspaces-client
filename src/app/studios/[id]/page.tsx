@@ -4,11 +4,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Check, MapPin, Star, UserRound } from "lucide-react";
 
+import { API_URL } from "@/lib/api";
 import { StudioDetailsSkeleton } from "@/components/shared/loading";
 import { BookingPanel } from "@/components/studios/booking-panel";
 import type { Studio } from "@/types/studio";
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000";
 
 async function getStudio(id: string): Promise<Studio | null> {
   const res = await fetch(`${API_URL}/api/studios/${id}`, { cache: "no-store" });

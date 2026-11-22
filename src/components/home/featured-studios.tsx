@@ -1,11 +1,10 @@
 import Link from "next/link";
 import { Suspense } from "react";
 
+import { API_URL } from "@/lib/api";
 import { StudioGridSkeleton } from "@/components/shared/loading";
 import { StudioCard } from "@/components/studios/studio-card";
 import type { Studio } from "@/types/studio";
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000";
 
 async function StudioGrid() {
   let studios: Studio[];

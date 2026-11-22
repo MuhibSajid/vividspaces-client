@@ -7,10 +7,9 @@ import { CalendarCheck, Clock, MapPin, TriangleAlert } from "lucide-react";
 import { toast } from "react-toastify";
 
 import { useAuth } from "@/hooks/use-auth";
+import { API_URL } from "@/lib/api";
 import { ListSkeleton, PageLoader } from "@/components/shared/loading";
 import type { Booking, BookingStatus } from "@/types/booking";
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000";
 
 const STATUS_STYLES: Record<BookingStatus, { badge: string; dot: string }> = {
   Pending: {
