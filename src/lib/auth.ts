@@ -7,13 +7,17 @@ await client.connect();
 const db = client.db("vividspaces");
 
 export const auth = betterAuth({
-  database: mongodbAdapter(db, {
-    client,
-  }),
+  database: mongodbAdapter(db, { client }),
   trustedOrigins: [
     "http://localhost:3000",
     "https://vividspaces-client.vercel.app",
   ],
+  account: {
+    accountLinking: {
+      enabled: true,
+      trustedProviders: ["google"],
+    },
+  },
   emailAndPassword: {
     enabled: true,
     minPasswordLength: 6,
