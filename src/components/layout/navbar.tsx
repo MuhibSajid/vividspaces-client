@@ -4,9 +4,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";
-
+import Image from "next/image";
 import {
-  Aperture,
   CalendarCheck,
   ChevronDown,
   CirclePlus,
@@ -80,14 +79,19 @@ export function Navbar() {
         aria-label="Primary"
       >
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2">
-          <span className="grid h-9 w-9 place-items-center rounded-xl bg-zinc-900 text-coral-400 dark:bg-white dark:text-coral-500">
-            <Aperture className="h-5 w-5" />
-          </span>
-          <span className="text-lg font-semibold tracking-tight">
-            Vivid<span className="text-coral-500">Spaces</span>
-          </span>
-        </Link>
+       <Link href="/" className="flex items-center gap-2">
+            <Image
+              src="/logo.png"
+              alt="VividSpaces logo"
+              width={36}
+              height={36}
+              priority
+              className="h-9 w-9"
+            />
+            <span className="text-lg font-semibold tracking-tight">
+              Vivid<span className="text-coral-500">Spaces</span>
+            </span>
+          </Link>
 
         {/* Desktop links */}
         <ul className="hidden items-center gap-1 text-sm font-medium lg:flex">
@@ -206,10 +210,8 @@ export function Navbar() {
       <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
         <SheetContent side="right" className="w-72 p-0">
           <SheetHeader className="border-b border-zinc-200 p-4 dark:border-zinc-800">
-            <SheetTitle className="flex items-center gap-2">
-              <span className="grid h-8 w-8 place-items-center rounded-lg bg-zinc-900 text-coral-400 dark:bg-white dark:text-coral-500">
-                <Aperture className="h-4 w-4" />
-              </span>
+              <SheetTitle className="flex items-center gap-2">
+              <Image src="/logo.png" alt="" width={32} height={32} className="h-8 w-8" />
               Vivid<span className="-ml-1.5 text-coral-500">Spaces</span>
             </SheetTitle>
           </SheetHeader>

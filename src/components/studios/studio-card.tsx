@@ -24,13 +24,19 @@ export function StudioCard({ studio }: { studio: Studio }) {
       <div className="flex flex-1 flex-col pt-4">
         <div className="flex items-start justify-between gap-3">
           <h3 className="line-clamp-1 text-lg font-semibold">{studio.title}</h3>
+         
           <span className="inline-flex shrink-0 items-center gap-1 text-sm">
             <Star className="h-4 w-4 fill-amber-400 text-amber-400" />
-            <b>{studio.rating.toFixed(2)}</b>
             {studio.reviewCount ? (
-              <span className="text-zinc-500">({studio.reviewCount})</span>
-            ) : null}
+              <>
+                <b>{studio.rating.toFixed(2)}</b>
+                <span className="text-zinc-500">({studio.reviewCount})</span>
+              </>
+            ) : (
+              <b>New</b>
+            )}
           </span>
+
         </div>
 
         <p className="mt-1 inline-flex items-center gap-1 text-sm text-zinc-500">

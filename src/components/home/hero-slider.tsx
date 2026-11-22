@@ -7,7 +7,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectFade } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper";
 import { ArrowUpRight, House } from "lucide-react";
-
 import "swiper/css";
 import "swiper/css/effect-fade";
 
@@ -15,19 +14,20 @@ const SLIDES = [
   {
     src: "/img/hero-1.png",
     alt: "Photo studio with a white cyclorama wall and softbox lighting",
-    label: "Photo Studios · 1,240 spaces live",
+    label: "Photo Studios",
   },
   {
     src: "/img/hero-2.png",
     alt: "Recording studio control room with a mixing console",
-    label: "Music Suites · 457 spaces live",
+    label: "Music Suites",
   },
   {
     src: "/img/hero-3.png",
     alt: "Sunlit loft art workshop with easels and canvases",
-    label: "Art Workshops · 276 spaces live",
+    label: "Art Workshops",
   },
 ];
+
 
 export function HeroSlider() {
   const [active, setActive] = useState(0);

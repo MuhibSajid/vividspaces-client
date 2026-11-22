@@ -3,9 +3,8 @@
 import Link from "next/link";
 import type { FormEvent } from "react";
 import { toast } from "react-toastify";
-import { Aperture } from "lucide-react";
-
 import { CATEGORIES } from "@/lib/constants";
+import Image from "next/image";
 
 const QUICK_LINKS = [
   { label: "Explore Studios", href: "/studios" },
@@ -73,14 +72,12 @@ export function Footer() {
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.4fr]">
         {/* Brand */}
         <div>
-          <Link href="/" className="flex items-center gap-2">
-            <span className="grid h-9 w-9 place-items-center rounded-xl bg-zinc-900 text-coral-400 dark:bg-white dark:text-coral-500">
-              <Aperture className="h-5 w-5" />
-            </span>
-            <span className="text-lg font-semibold tracking-tight">
-              Vivid<span className="text-coral-500">Spaces</span>
-            </span>
-          </Link>
+                    <Link href="/" className="flex items-center gap-2">
+              <Image src="/logo.png" alt="VividSpaces logo" width={36} height={36} className="h-9 w-9" />
+              <span className="text-lg font-semibold tracking-tight">
+                Vivid<span className="text-coral-500">Spaces</span>
+              </span>
+            </Link>
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
             We connect independent creators with the rooms, gear and hosts that
             turn ideas into finished work — one hour at a time.

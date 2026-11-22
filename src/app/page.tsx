@@ -2,6 +2,10 @@ import { Suspense } from "react";
 
 import { HeroSlider } from "@/components/home/hero-slider";
 import { SearchBar } from "@/components/home/search-bar";
+import { FeaturedStudios } from "@/components/home/featured-studios";
+import { Categories, CategoriesLoader } from "@/components/home/categories";
+import { HowItWorks } from "@/components/home/how-it-works";
+import { HostGuarantee } from "@/components/home/host-guarantee";
 
 function HeroSkeleton() {
   return (
@@ -14,11 +18,19 @@ function HeroSkeleton() {
 
 export default function HomePage() {
   return (
-    <section id="home" aria-label="Hero" className="px-4 pt-6 sm:px-6">
-      <Suspense fallback={<HeroSkeleton />}>
-        <HeroSlider />
+    <>
+      <section id="home" aria-label="Hero" className="px-4 pt-6 sm:px-6">
+        <Suspense fallback={<HeroSkeleton />}>
+          <HeroSlider />
+        </Suspense>
+        <SearchBar />
+      </section>
+      <FeaturedStudios />
+      <Suspense fallback={<Categories counts={null} />}>
+        <CategoriesLoader />
       </Suspense>
-      <SearchBar />
-    </section>
+      <HowItWorks />
+      <HostGuarantee />
+    </>
   );
 }

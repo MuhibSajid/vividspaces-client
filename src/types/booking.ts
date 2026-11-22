@@ -6,6 +6,8 @@ export type Booking = {
   studioTitle: string;
   studioImage: string;
   studioLocation: string;
+  userName?: string;
+  userEmail?: string;
   date: string;
   startTime: string;
   endTime: string;
