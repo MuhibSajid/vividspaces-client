@@ -9,8 +9,14 @@ export const auth = betterAuth({
   database: mongodbAdapter(db, {
     client,
   }),
-  emailAndPassword: { 
-    enabled: true, 
+  trustedOrigins: [
+    "http://localhost:3000",
+    "https://vividspaces-client.vercel.app",
+  ],
+  emailAndPassword: {
+    enabled: true,
+    minPasswordLength: 6,
+    autoSignIn: false,
   },
   socialProviders: {
     google: {
