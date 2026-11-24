@@ -13,6 +13,20 @@ const nextConfig: NextConfig = {
       },
     },
   },
+  images: {
+    remotePatterns: [
+      { protocol: "https", hostname: "i.ibb.co" },
+      { protocol: "https", hostname: "images.pexels.com" },
+    ],
+  },
+  async rewrites() {
+    return [
+      {
+        source: "/backend/:path*",
+        destination: `${process.env.NEXT_PUBLIC_API_URL}/:path*`,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

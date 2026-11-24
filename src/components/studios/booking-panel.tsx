@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { X } from "lucide-react";
-
+import { apiFetch } from "@/lib/api-fetch";
 import { useAuth } from "@/hooks/use-auth";
-import { API_URL } from "@/lib/api";
+
 
 type Props = {
   studio: {
@@ -81,8 +81,8 @@ export function BookingPanel({ studio }: Props) {
     setError("");
 
     setLoading(true);
-    try {
-      const res = await fetch(`${API_URL}/api/bookings`, {
+   try {
+      const res = await apiFetch("/api/bookings", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

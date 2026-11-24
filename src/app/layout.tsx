@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { JwtSync } from "@/components/auth/jwt-sync";
 import "./globals.css";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
@@ -60,6 +61,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="flex min-h-full flex-col bg-white text-zinc-900 transition-colors dark:bg-zinc-950 dark:text-zinc-100">
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <JwtSync />
             <Suspense fallback={<div className="h-16 border-b border-zinc-200 dark:border-zinc-800" />}>
               <Navbar />
             </Suspense>

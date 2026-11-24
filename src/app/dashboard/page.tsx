@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Plus, TriangleAlert } from "lucide-react";
 import { toast } from "react-toastify";
-
+import { apiFetch } from "@/lib/api-fetch";
 import { useAuth } from "@/hooks/use-auth";
 import { API_URL } from "@/lib/api";
 import { PageLoader, SkeletonBlock } from "@/components/shared/loading";
@@ -47,7 +47,7 @@ export default function DashboardPage() {
     if (!email) return;
     const q = encodeURIComponent(email);
 
-    fetch(`${API_URL}/api/bookings/host?email=${q}`)
+    apiFetch("/api/bookings/host")
       .then((res) => {
         if (!res.ok) throw new Error("Request failed");
         return res.json();
@@ -73,7 +73,7 @@ export default function DashboardPage() {
   async function updateStatus({ booking, status }: Action) {
     setBusyId(booking._id);
     try {
-      const res = await fetch(`${API_URL}/api/bookings/${booking._id}/status`, {
+      const res = await apiFetch(`/api/bookings/${booking._id}/status`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status }),

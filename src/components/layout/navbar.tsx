@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import {
   CalendarCheck,
   ChevronDown,
@@ -64,14 +65,17 @@ function getInitials(name: string) {
 
 export function Navbar() {
   const pathname = usePathname();
+  const router = useRouter();
   const { user, isPending, logout } = useAuth();
   const [mobileOpen, setMobileOpen] = useState(false);
 
   async function handleLogout() {
-    await logout();
-    setMobileOpen(false);
-    toast.success("You have been logged out.");
-  }
+  await logout();
+  setMobileOpen(false);
+  toast.success("You have been logged out.");
+  router.push("/");
+  router.refresh();
+}
 
   return (
     <header className="sticky top-0 z-40 border-b border-zinc-200/80 bg-white/80 backdrop-blur-xl dark:border-zinc-800/80 dark:bg-zinc-950/80">

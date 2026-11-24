@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-
+import { apiFetch } from "@/lib/api-fetch";
 import { useAuth } from "@/hooks/use-auth";
 import { API_URL } from "@/lib/api";
 import { AMENITIES, CATEGORIES } from "@/lib/constants";
@@ -99,7 +99,7 @@ export function EditStudioForm({ id }: Props) {
 
     setSaving(true);
     try {
-      const res = await fetch(`${API_URL}/api/studios/${id}`, {
+      const res = await apiFetch(`/api/studios/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

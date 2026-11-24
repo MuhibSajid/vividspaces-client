@@ -17,6 +17,14 @@ function FieldError({ message }: { message?: string }) {
   return <span className="mt-1 block text-xs text-red-600">{message}</span>;
 }
 
+// Only allow redirects to pages on this site
+function getRedirectTarget() {
+  const target = new URLSearchParams(window.location.search).get("redirect");
+  return target && target.startsWith("/") && !target.startsWith("//")
+    ? target
+    : "/";
+}
+
 export default function SigninPage() {
   const router = useRouter();
   const [errors, setErrors] = useState<Errors>({});
@@ -47,14 +55,14 @@ export default function SigninPage() {
     }
 
     toast.success("Welcome back!");
-    router.push("/");
+    router.push(getRedirectTarget());
     router.refresh();
   }
 
-  async function handleGoogle() {
+ async function handleGoogle() {
     const { error } = await authClient.signIn.social({
       provider: "google",
-      callbackURL: "/",
+      callbackURL: getRedirectTarget(),
     });
     if (error) toast.error(error.message ?? "Google sign-in failed");
   }

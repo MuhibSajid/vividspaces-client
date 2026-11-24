@@ -4,9 +4,8 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-
 import { useAuth } from "@/hooks/use-auth";
-import { API_URL } from "@/lib/api";
+import { apiFetch } from "@/lib/api-fetch";
 import { AMENITIES, CATEGORIES } from "@/lib/constants";
 import { FormSkeleton } from "@/components/shared/loading";
 
@@ -63,7 +62,7 @@ export default function AddStudioPage() {
 
     setLoading(true);
     try {
-      const res = await fetch(`${API_URL}/api/studios`, {
+      const res = await apiFetch("/api/studios", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

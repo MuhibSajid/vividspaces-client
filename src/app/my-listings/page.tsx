@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 
 import { useAuth } from "@/hooks/use-auth";
 import { API_URL } from "@/lib/api";
+import { apiFetch } from "@/lib/api-fetch";
 import { PageLoader, StudioGridSkeleton } from "@/components/shared/loading";
 import { StudioCard } from "@/components/studios/studio-card";
 import type { Studio } from "@/types/studio";
@@ -45,9 +46,9 @@ export default function MyListingsPage() {
     if (!target) return;
     setDeleting(true);
     try {
-      const res = await fetch(`${API_URL}/api/studios/${target._id}`, {
-        method: "DELETE",
-      });
+      const res = await apiFetch(`/api/studios/${target._id}`, {
+      method: "DELETE",
+    });
       if (!res.ok) {
         const data = await res.json().catch(() => null);
         toast.error(data?.message ?? "Could not delete the studio");

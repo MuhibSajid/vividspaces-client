@@ -5,9 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { CalendarCheck, Clock, MapPin, TriangleAlert } from "lucide-react";
 import { toast } from "react-toastify";
-
+import { apiFetch } from "@/lib/api-fetch";
 import { useAuth } from "@/hooks/use-auth";
-import { API_URL } from "@/lib/api";
 import { ListSkeleton, PageLoader } from "@/components/shared/loading";
 import type { Booking, BookingStatus } from "@/types/booking";
 
@@ -46,7 +45,7 @@ export default function MyBookingsPage() {
   useEffect(() => {
     if (!email) return;
 
-    fetch(`${API_URL}/api/bookings?email=${encodeURIComponent(email)}`)
+    apiFetch("/api/bookings")
       .then((res) => {
         if (!res.ok) throw new Error("Request failed");
         return res.json();
@@ -68,7 +67,7 @@ export default function MyBookingsPage() {
     if (!target) return;
     setCancelling(true);
     try {
-      const res = await fetch(`${API_URL}/api/bookings/${target._id}/cancel`, {
+      const res = await apiFetch(`/api/bookings/${target._id}/cancel`, {
         method: "PATCH",
       });
       if (!res.ok) {

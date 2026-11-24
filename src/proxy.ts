@@ -17,17 +17,20 @@ function matches(pathname: string, route: string) {
 }
 
 export function proxy(request: NextRequest) {
-  const { pathname } = request.nextUrl;
-  // Cookie presence only — an optimistic check. Real authorization still
-  // belongs in the data layer (server components / route handlers).
+  const { pathname, search } = request.nextUrl;
   const hasSession = Boolean(getSessionCookie(request));
 
   if (!hasSession && PROTECTED_ROUTES.some((route) => matches(pathname, route))) {
-    return NextResponse.redirect(new URL("/signin", request.url));
+    const url = new URL("/signin", request.url);
+    url.searchParams.set("redirect", pathname + search);
+    return NextResponse.redirect(url);
   }
 
   if (hasSession && AUTH_ROUTES.some((route) => matches(pathname, route))) {
-    return NextResponse.redirect(new URL("/", request.url));
+    const target = request.nextUrl.searchParams.get("redirect");
+    const safe =
+      target && target.startsWith("/") && !target.startsWith("//") ? target : "/";
+    return NextResponse.redirect(new URL(safe, request.url));
   }
 
   return NextResponse.next();
